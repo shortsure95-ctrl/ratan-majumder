@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ratan Panel</title>
+<style>
+  :root{
+    --green:#00ff9d;
+    --blue:#00c8ff;
+    --bg:#02060a;
+    font-family: Poppins, sans-serif;
+  }
+  body{margin:0;background:var(--bg);color:white;overflow-x:hidden}
+
+  /* particle canvas */
+  #particles{position:fixed;inset:0;z-index:0}
+
+  .wrap{position:relative;z-index:2;min-height:100vh;padding:40px;display:flex;justify-content:center;align-items:center}
+
+  .box{
+    width:100%;max-width:900px;background:rgba(0,0,0,0.45);backdrop-filter:blur(10px);
+    padding:30px;border-radius:20px;box-shadow:0 0 40px rgba(0,255,180,0.15);
+  }
+
+  /* Logo */
+  .logo{
+    width:140px;height:140px;margin:0 auto 20px;display:grid;place-items:center;
+    border:2px solid rgba(0,255,180,0.3);border-radius:20px;background:rgba(0,0,0,0.3);
+  }
+  .logo svg{width:90px;height:90px}
+
+  /* Buttons */
+  .panels{display:flex;flex-direction:column;gap:15px;margin-top:20px}
+  .btn{
+    padding:15px;border-radius:14px;background:linear-gradient(90deg,var(--green),var(--blue));
+    text-decoration:none;color:black;font-weight:700;text-align:center;font-size:18px;
+    box-shadow:0 0 20px rgba(0,255,200,0.3);transition:0.2s;
+  }
+  .btn:hover{transform:scale(1.04)}
+
+  /* socials */
+  .socials{margin-top:25px;display:flex;justify-content:center;gap:12px}
+  .social-btn{
+    padding:10px 14px;background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.1);border-radius:12px;
+    color:white;text-decoration:none;font-weight:600;display:flex;align-items:center;gap:6px;
+  }
+  .social-btn:hover{background:rgba(255,255,255,0.16)}
+
+  @media(max-width:600px){.btn{font-size:16px;padding:12px}}
+</style>
+</head>
+<body>
+<canvas id="particles"></canvas>
+
+<div class="wrap">
+  <div class="box">
+
+    <!-- Logo -->
+    <div class="logo" style="overflow:hidden">
+      <img src="ratan.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:20px;" />
+    </div>
+
+    <!-- Main 3 buttons -->
+    <div class="hackbox" style="margin-top:15px;padding:12px;border:1px solid rgba(0,255,180,0.3);border-radius:14px;text-align:left;font-weight:700;color:#00ff9d;font-size:14px;letter-spacing:1px;box-shadow:0 0 18px rgba(0,255,180,0.25);">
+      <div class="term" style="background:rgba(0,0,0,0.35);border-radius:10px;padding:10px;border:1px solid rgba(0,255,180,0.08);max-height:140px;overflow:hidden;font-family:monospace;color:#9affb8">
+        <div style="font-size:12px;opacity:0.9;margin-bottom:6px;font-weight:800">HACKING SYSTEM — TERMINAL</div>
+        <div id="termBody" style="line-height:1.35;font-size:13px;height:92px;overflow:hidden"></div>
+      </div>
+    </div>
+    <style>
+      /* terminal small styles */
+      @keyframes termGlow{0%{box-shadow:0 0 6px rgba(0,255,150,0.06)}50%{box-shadow:0 0 18px rgba(0,255,150,0.12)}100%{box-shadow:0 0 6px rgba(0,255,150,0.06)}}
+      .term{animation:termGlow 2.8s infinite}
+    </style>
+    <script>
+      (function(){
+        const lines=[
+          'init() — loading modules...',
+          'auth: guest (no privileges)',
+          'probe: 0x002f — ok',
+          'interface: online',
+          'connect: youtube.com — handshake',
+          'connect: tiktok.com — handshake',
+          'packets: 0x1a3f',
+          'firewall: bypass attempt',
+          'ffid_check: pending',
+          'emote_push: ready',
+          'watchdog: active',
+          'status: monitoring'
+        ];
+        let idx=0;
+        const body=document.getElementById('termBody');
+        function tick(){
+          body.innerHTML='';
+          for(let i=0;i<6;i++){
+            const t = lines[(idx+i)%lines.length];
+            const div = document.createElement('div');
+            div.textContent = '» '+t+'   // '+Math.floor(Math.random()*90000);
+            body.appendChild(div);
+          }
+          idx = (idx+1) % lines.length;
+        }
+        tick();
+        setInterval(tick,900);
+      })();
+    </script>
+    <div class="panels">
+      <a class="btn" href="https://ratan-majumder.github.io/key/" target="_blank">Main Panel</a>
+      <a class="btn" href="https://ratan-majumder.github.io/ratanmajumder-emote/" target="_blank">Emote Panel</a>
+      <a class="btn" href="https://ratan-majumder.github.io/unban-bw/" target="_blank">FF ID Unban</a>
+    </div>
+
+    <!-- Social Row -->
+    <div class="socials">
+      <a class="social-btn" style="background:linear-gradient(90deg,#ff0000,#ff4d4d);border:none;color:white;font-weight:700;" href="https://youtube.com" target="_blank">▶ YouTube</a>
+      <a class="social-btn" style="background:linear-gradient(90deg,#000000,#444444);border:none;color:white;font-weight:700;" href="https://tiktok.com" target="_blank">♛ TikTok</a>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const c = document.getElementById('particles');
+const x = c.getContext('2d');
+let w = c.width = innerWidth;
+let h = c.height = innerHeight;
+let p = [];
+
+for(let i=0;i<90;i++) p.push({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.6,vy:(Math.random()-.5)*.6});
+
+function loop(){
+  x.clearRect(0,0,w,h);
+  p.forEach(a=>{
+    a.x+=a.vx; a.y+=a.vy;
+    if(a.x<0||a.x>w||a.y<0||a.y>h){a.x=Math.random()*w;a.y=Math.random()*h}
+    x.fillStyle='rgba(0,255,200,.8)';
+    x.beginPath(); x.arc(a.x,a.y,2,0,6.28); x.fill();
+  });
+  requestAnimationFrame(loop);
+}
+loop();
+
+onresize = ()=>{w=c.width=innerWidth;h=c.height=innerHeight};
+</script>
+</body>
+</html>
